@@ -13,7 +13,8 @@ const dbPath = path.join(__dirname, "financepeer.db");
 const app = express();
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+origin:*));
 
 
 let database = null;
