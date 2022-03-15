@@ -1,0 +1,22 @@
+post http://localhost:3002/register
+Content-Type: application/json
+
+{ 
+    "name":"vishal",
+    "username":"visvarma", 
+    "password":"vrv1234", 
+    "gender":"male"
+ }
+
+ ###
+
+
+post http://localhost:3002/register
+Content-Type: application/json
+
+{ 
+    "name":"vishal",
+    "username":"visvarma", 
+    "password":"vrv1234", 
+    "gender":"male"
+ }
