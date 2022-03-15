@@ -97,6 +97,7 @@ app.post("/login/", async (request, response) => {
     const selectUserQuery = `SELECT * FROM users WHERE username = '${username}'`;
     const dbUser = await database.get(selectUserQuery);
     if (dbUser === undefined) {
+      response.set('Access-Control-Allow-Origin', '*');
       response.status(400).json({ error: "INVALID USER" });
     } else {
       const isPasswordMatched = await bcrypt.compare(password, dbUser.password);
@@ -105,8 +106,10 @@ app.post("/login/", async (request, response) => {
           username: username,
         };
         const jwtToken = jwt.sign(payload, process.env.TOKEN);
+        response.set('Access-Control-Allow-Origin', '*');
         response.status(200).json({ jwtToken });
       } else {
+        response.set('Access-Control-Allow-Origin', '*');
         response.status(400).json({ error: "invalid password" });
       }
     }
