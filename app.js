@@ -113,4 +113,8 @@ app.post("/login/", async (request, response) => {
   }
 });
 
+app.get("/", (req, res) => {
+  res.send("hey vrv");
+});
+
 module.exports = app;
