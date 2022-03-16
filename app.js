@@ -109,12 +109,11 @@ app.post("/login/", async (request, response) => {
           username: username,
         };
         const jwtToken = jwt.sign(payload, process.env.TOKEN);
-<<<<<<< HEAD
+
         response.status(200).json({ jwtToken: jwtToken });
-=======
         response.set('Access-Control-Allow-Origin', '*');
         response.status(200).json({ jwtToken });
->>>>>>> 666e18269927afec0019017cd82184e856360b25
+
       } else {
         response.set('Access-Control-Allow-Origin', '*');
         response.status(400).json({ error: "invalid password" });
