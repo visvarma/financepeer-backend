@@ -6,17 +6,24 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const cors = require("cors");
 
+
 require("dotenv").config();
 
 const dbPath = path.join(__dirname, "financepeer.db");
 const app = express();
 
 app.use(express.json());
+<<<<<<< HEAD
 app.use(
   cors({
     origin: "*",
   })
 );
+=======
+app.use(cors({
+origin:"*"));
+
+>>>>>>> 666e18269927afec0019017cd82184e856360b25
 
 let database = null;
 
@@ -98,6 +105,7 @@ app.post("/login/", async (request, response) => {
     const selectUserQuery = `SELECT * FROM users WHERE username = '${username}'`;
     const dbUser = await database.get(selectUserQuery);
     if (dbUser === undefined) {
+      response.set('Access-Control-Allow-Origin', '*');
       response.status(400).json({ error: "INVALID USER" });
     } else {
       const isPasswordMatched = await bcrypt.compare(password, dbUser.password);
@@ -106,8 +114,14 @@ app.post("/login/", async (request, response) => {
           username: username,
         };
         const jwtToken = jwt.sign(payload, process.env.TOKEN);
+<<<<<<< HEAD
         response.status(200).json({ jwtToken: jwtToken });
+=======
+        response.set('Access-Control-Allow-Origin', '*');
+        response.status(200).json({ jwtToken });
+>>>>>>> 666e18269927afec0019017cd82184e856360b25
       } else {
+        response.set('Access-Control-Allow-Origin', '*');
         response.status(400).json({ error: "invalid password" });
       }
     }
