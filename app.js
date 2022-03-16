@@ -12,7 +12,11 @@ const dbPath = path.join(__dirname, "financepeer.db");
 const app = express();
 
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 
 let database = null;
 
@@ -63,8 +67,7 @@ app.post("/register/", async (request, response) => {
     const dbUser = await database.get(selectUserQuery);
     if (dbUser === undefined) {
       if (password.length < 6) {
-        response.status(400);
-        response.send("Password is too short");
+        response.status(400).json({ error: "Password too short" });
       } else {
         const createUserQuery = `
       INSERT INTO
@@ -103,7 +106,7 @@ app.post("/login/", async (request, response) => {
           username: username,
         };
         const jwtToken = jwt.sign(payload, process.env.TOKEN);
-        response.status(200).json({ jwtToken });
+        response.status(200).json({ jwtToken: jwtToken });
       } else {
         response.status(400).json({ error: "invalid password" });
       }
@@ -111,10 +114,6 @@ app.post("/login/", async (request, response) => {
   } catch (e) {
     console.log(e);
   }
-});
-
-app.get("/", (req, res) => {
-  res.send("hey vrv");
 });
 
 module.exports = app;

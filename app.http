@@ -3,20 +3,18 @@ Content-Type: application/json
 
 { 
     "name":"vishal",
-    "username":"visvarma", 
-    "password":"vrv1234", 
+    "username":"visvarma2", 
+    "password":"vrv123456", 
     "gender":"male"
  }
 
- ###
+###
 
 
-post http://localhost:3002/register
+post http://localhost:3001/login
 Content-Type: application/json
 
 { 
-    "name":"vishal",
-    "username":"visvarma", 
-    "password":"vrv1234", 
-    "gender":"male"
- }
+   "username":"visvarma2", 
+   "password":"vrv123456"
+}
